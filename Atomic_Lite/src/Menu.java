@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,8 @@ public class Menu extends JPanel {
                 }
                 catch (IOException ex) {
                     JOptionPane.showMessageDialog(mainGui, "File Not Found");
+                }
+                catch(NullPointerException ignored){
                 }
             }
         });
@@ -141,6 +144,15 @@ public class Menu extends JPanel {
     }
 
     private void openFile() throws IOException {
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Text Files", "txt", "text"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Java Files", "java"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Python Files", "py"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("C Files", "c", "o", "h"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("C++ Files", "cpp", "cxx", "cc", "o", "h"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("R Files", "r"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("JavaScript Files", "js"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("C# Files", "cs"));
+
         int fileExp = chooser.showOpenDialog(mainGui);
         if(fileExp == JFileChooser.APPROVE_OPTION){
             String path = chooser.getSelectedFile().getAbsolutePath();
